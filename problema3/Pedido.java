@@ -1,22 +1,24 @@
+package problema3;
 
+import java.util.ArrayList;
 import java.util.Date;
 
-
-/**
- *
- * @author Camila
- */
 public class Pedido {
 
-    //Atributos
-private int numero;
-private String nomeCliente;
-private Date data;
-private String endereco;
+    private int numero;
+    private String nomeCliente;
+    private Date data;
+    private String endereco;
+    private ArrayList<ItemPedido> itens;
+    private EntregaStrategy strategy;
 
-    //Contrutor
+    public void setStrategy(EntregaStrategy strategy) {
+        this.strategy = strategy;
+    }
 
-    //Getters e Setters
+    public Pedido() {
+        itens = new ArrayList<>();
+    }
 
     public int getNumero() {
         return numero;
@@ -50,12 +52,38 @@ private String endereco;
         this.endereco = endereco;
     }
 
-    
-    //Métodos
-    
-    /*
-    * getValor pedido :double
-    * incluirItem(Produto, int) :void
-     */
-    
+    public void incluirItem(Produto p, int qtd) {
+        this.itens.add(new ItemPedido(p, qtd));
+    }
+
+    public double getValorPedido() {
+        double valorTotal = 0;
+        for (ItemPedido ip : this.itens) {
+            valorTotal += (ip.getValorItem());
+        }
+        return valorTotal;
+    }
+
+    public double getMassa() {
+        double massa = 0;
+        for (ItemPedido item : itens) {
+            massa += item.getQuantidade() * item.getProduto().getPeso();
+
+        }
+        return massa;
+    }
+
+    public double getValorEntrega() {
+
+        return strategy.getValor(this);
+    }
+
+    public int getQuantidadeItens() {
+
+        return itens.size();
+    }
+
+    public double getValorTotal() {
+        return getValorPedido() + getValorEntrega();
+    }
 }

@@ -1,24 +1,21 @@
+package problema3;
 
-/**
- *
- * @author Camila
- */
 public class Produto {
 
-//Atributos
     private String descricao;
     private double valor;
     private int peso;
-    
-//Construtor
 
+    /**
+     * @param descricao
+     * @param valor
+     * @param peso
+     */
     public Produto(String descricao, double valor, int peso) {
-        this.setDescricao(descricao);
-        this.setValor(valor);
-        this.setPeso(peso);
+        setDescricao(descricao);
+        setValor(valor);
+        setPeso(peso);
     }
-
-//Getter e setter    
 
     public String getDescricao() {
         return descricao;
@@ -41,9 +38,10 @@ public class Produto {
     }
 
     public void setPeso(int peso) {
-        this.peso = peso;
+        if (peso <= 0) {
+            throw new IllegalArgumentException("Peso do produto deve ser acima de ZERO");
+        } else {
+            this.peso = peso;
+        }
     }
-    
-    
-    
 }

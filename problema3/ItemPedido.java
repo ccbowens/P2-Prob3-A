@@ -1,31 +1,29 @@
+package problema3;
 
-/**
- *
- * @author Camila
- */
-public class ItemPedido {
+class ItemPedido {
 
-    //Atributos
     private Produto produto;
     private int quantidade;
-    
 
-    //Construtor
-
+    /**
+     * @param produto
+     * @param quantidade
+     */
     protected ItemPedido(Produto produto, int quantidade) {
-        this.setProduto(produto);
-        this.setQuantidade(quantidade);
+        setProduto(produto);
+        setQuantidade(quantidade);
     }
-    
-    
-    //Getter e Setter
 
     protected Produto getProduto() {
         return produto;
     }
 
     protected void setProduto(Produto produto) {
-        this.produto = produto;
+        if (produto == null) {
+            throw new IllegalArgumentException("Deve ser definido um produto");
+        } else {
+            this.produto = produto;
+        }
     }
 
     protected int getQuantidade() {
@@ -33,11 +31,14 @@ public class ItemPedido {
     }
 
     protected void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
+        if (quantidade <= 0) {
+            throw new IllegalArgumentException("Quantidade de itens de pedido deve ser maior que ZERO");
+        } else {
+            this.quantidade = quantidade;
+        }
     }
-    
-    protected double getValorItem(){
-            return produto.getValor();}
-    
-    
+
+    protected double getValorItem() {
+        return this.quantidade * this.produto.getValor();
+    }
 }
