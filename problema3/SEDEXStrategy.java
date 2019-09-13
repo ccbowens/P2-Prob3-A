@@ -16,9 +16,12 @@ public class SEDEXStrategy implements EntregaStrategy {
     }
 
     @Override
-    public double getValor(Pedido pedido) {
+    public double getValor(Pedido pedido) throws Exception {
         double massa = pedido.getMassa();
-        if (massa < 500) {
+        if (massa <0){
+        throw new TipoEntregaInvalidoException("Não existe peso negativo");
+        }
+        else if (massa < 500) {
             return 12.5;
         } else if (massa < 750) {
             return 20;
@@ -29,6 +32,7 @@ public class SEDEXStrategy implements EntregaStrategy {
         } else {
             return 45 + (massa - 2000) * 1.5;
         }
+
     }
 
 }

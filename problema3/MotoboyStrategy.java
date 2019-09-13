@@ -16,10 +16,10 @@ public class MotoboyStrategy implements EntregaStrategy {
     }
 
     @Override
-    public double getValor(Pedido pedido) {
+    public double getValor(Pedido pedido) throws Exception {
 
         if (pedido.getMassa() > 25000 || pedido.getQuantidadeItens() > 30) {
-            throw new TipoEntregaInvalido();
+            throw new TipoEntregaInvalidoException("Só é permitido até 30 itens ou no máximo 25Kg");
         }
         return 7;
     }

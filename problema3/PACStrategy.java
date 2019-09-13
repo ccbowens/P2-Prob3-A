@@ -15,7 +15,7 @@ public class PACStrategy implements EntregaStrategy {
     }
 
     @Override
-    public double getValor(Pedido pedido) {
+    public double getValor(Pedido pedido) throws Exception{
         double massa = pedido.getMassa();
         if (massa <= 1000) {
             return 10;
@@ -26,7 +26,7 @@ public class PACStrategy implements EntregaStrategy {
         } else if (massa <= 5000) {
             return 30;
         } else {
-            throw new TipoEntregaInvalido();
+            throw new TipoEntregaInvalidoException("Acima do peso possivel para PAC");
         }
 
     }

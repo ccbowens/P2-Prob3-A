@@ -1,0 +1,5 @@
+Concrete = classes que implementam EntregaStrategy
+
+Context = Pedido
+
+Singleton = classes que implementam EntregaStrategy
